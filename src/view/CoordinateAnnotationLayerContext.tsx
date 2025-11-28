@@ -8,7 +8,9 @@ export const CoordinateAnnotationLayerContext = createContext<{
             title?: string | null | undefined,
             iconAsset?: string | null | undefined,
             coordinates: [number, number],
-            isSelected: boolean | null
+            isSelected: boolean | null,
+            labelTextColor: number,
+            labelStrokeColor: number
         },
         callbacks: AnnotationCallbacks
     ) => void,
@@ -19,7 +21,9 @@ export const CoordinateAnnotationLayerContext = createContext<{
             title?: string | null | undefined,
             iconAsset?: string | null | undefined,
             coordinates: [number, number],
-            isSelected: boolean | null
+            isSelected: boolean | null,
+            labelTextColor: number,
+            labelStrokeColor: number
         }
     ) => void,
 
@@ -29,12 +33,26 @@ export const CoordinateAnnotationLayerContext = createContext<{
 }>({
     addAnnotation: (
         _annotationId: number,
-        _annotation: { title?: string | null | undefined, iconAsset?: string | null | undefined, coordinates: [number, number] },
+        _annotation: {
+            title?: string | null | undefined,
+            iconAsset?: string | null | undefined,
+            coordinates: [number, number],
+            isSelected: boolean | null,
+            labelTextColor: number,
+            labelStrokeColor: number
+        },
         _callbacks: AnnotationCallbacks
     ) => {},
     updateAnnotation: (
         _annotationId: number,
-        _annotation: { title?: string | null | undefined, iconAsset?: string | null | undefined, coordinates: [number, number] }
+        _annotation: {
+            title?: string | null | undefined,
+            iconAsset?: string | null | undefined,
+            coordinates: [number, number],
+            isSelected: boolean | null,
+            labelTextColor: number,
+            labelStrokeColor: number
+        }
     ) => {},
     removeAnnotation: (
         _annotationId: number
