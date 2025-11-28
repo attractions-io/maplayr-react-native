@@ -1,0 +1,149 @@
+{
+  "name": "@maplayr/react-native",
+  "version": "0.0.1",
+  "description": "React Native MapLayr SDK",
+  "main": "./lib/module/index.js",
+  "types": "./lib/typescript/src/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.tsx",
+      "types": "./lib/typescript/src/index.d.ts",
+      "default": "./lib/module/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "lib",
+    "scripts",
+    "android",
+    "ios",
+    "cpp",
+    "*.podspec",
+    "react-native.config.js",
+    "!ios/build",
+    "!android/build",
+    "!android/gradle",
+    "!android/gradlew",
+    "!android/gradlew.bat",
+    "!android/local.properties",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__",
+    "!**/.*"
+  ],
+  "scripts": {
+    "example": "yarn workspace react-native-maplayr-example",
+    "typecheck": "tsc",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" \"example/src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" \"example/src/**/*.{ts,tsx}\" --fix",
+    "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
+    "prepare": "bob build",
+    "release": "release-it",
+    "docs": "typedoc"
+  },
+  "keywords": [
+    "react-native",
+    "react",
+    "native",
+    "ios",
+    "android",
+    "maps",
+    "mapping",
+    "maplayr",
+    "indoor-maps",
+    "navigation",
+    "attractions",
+    "venue-mapping"
+  ],
+  "author": "Attractions.io",
+  "homepage": "https://attractions.io/maplayr",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "@react-native-community/cli": "20.0.0",
+    "@react-native/eslint-config": "0.81.1",
+    "@release-it/conventional-changelog": "^9.0.2",
+    "@types/react": "^19.1.0",
+    "del-cli": "^5.1.0",
+    "eslint": "^9.39.0",
+    "react": "19.1.0",
+    "react-native": "0.81.1",
+    "react-native-builder-bob": "^0.40.14",
+    "release-it": "^17.10.0",
+    "typedoc": "^0.28.14",
+    "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "workspaces": [
+    "example"
+  ],
+  "packageManager": "yarn@3.6.1",
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "angular"
+        }
+      }
+    }
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "codegen",
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "codegenConfig": {
+    "name": "MapLayrSpec",
+    "type": "all",
+    "jsSrcsDir": "src",
+    "outputDir": {
+      "ios": "ios/generated",
+      "android": "android/generated"
+    },
+    "android": {
+      "javaPackageName": "com.reactnative.maplayr"
+    },
+    "ios": {
+      "components": {
+        "ReactNativeMapView": {
+          "className": "ReactNativeMapView"
+        }
+      }
+    },
+    "includesGeneratedCode": true
+  },
+  "create-react-native-library": {
+    "languages": "kotlin-objc",
+    "type": "fabric-view",
+    "version": "0.55.0"
+  }
+}

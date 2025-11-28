@@ -1,0 +1,23 @@
+{
+  "originHash" : "2f79b07138d1fe66afc4406dfa37fb58c12e59000f4381f154578dd28d6d3a09",
+  "pins" : [
+    {
+      "identity" : "maplayr-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/attractions-io/maplayr-ios.git",
+      "state" : {
+        "revision" : "c0af108cf44915e986cc9e775f6045952d79510a"
+      }
+    },
+    {
+      "identity" : "zipfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/weichsel/ZIPFoundation.git",
+      "state" : {
+        "revision" : "02b6abe5f6eef7e3cbd5f247c5cc24e246efcfe0",
+        "version" : "0.9.19"
+      }
+    }
+  ],
+  "version" : 3
+}

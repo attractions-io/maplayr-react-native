@@ -1,0 +1,93 @@
+buildscript {
+  apply from: "attractionsioconfig.gradle"
+
+  repositories {
+    google()
+    mavenCentral()
+    maven {
+      url = "https://maven.pkg.github.com/attractions-io/MapLayr-Android"
+      credentials {
+        username rootProject.ext.attractionsIo.mapLayr.android.github.username
+        password rootProject.ext.attractionsIo.mapLayr.android.github.personalAccessToken
+      }
+    }
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle:8.7.2"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20"
+    classpath "io.attractions:maplayr-plugin:0.0.109"
+  }
+}
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "com.facebook.react"
+apply plugin: 'io.attractions.maplayr-plugin'
+
+android {
+  namespace "com.reactnative.maplayr"
+
+  defaultConfig {
+    compileSdk 35
+    minSdkVersion 24
+    targetSdkVersion 35
+  }
+
+  buildFeatures {
+    buildConfig true
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+
+  lintOptions {
+    disable "GradleCompatible"
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  sourceSets {
+    main {
+      java.srcDirs += [
+        "generated/java",
+        "generated/jni"
+      ]
+    }
+  }
+}
+
+rootProject.allprojects {
+  repositories {
+    mavenCentral()
+    google()
+    maven {
+      url = "https://maven.pkg.github.com/attractions-io/maplayr-android"
+      credentials {
+        username rootProject.ext.attractionsIo.mapLayr.android.github.username
+        password rootProject.ext.attractionsIo.mapLayr.android.github.personalAccessToken
+      }
+    }
+  }
+}
+
+dependencies {
+  implementation "com.facebook.react:react-android"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:2.1.20"
+  implementation "io.attractions:maplayr:0.0.109"
+  implementation "io.attractions:positioning-google:0.0.109"
+}
+
+attractionsIo {
+  apiKey = rootProject.ext.attractionsIo.apiKey
+
+  if (rootProject.ext.attractionsIo.mapLayr?.maps != null) {
+    maps = rootProject.ext.attractionsIo.mapLayr.maps
+  }
+}

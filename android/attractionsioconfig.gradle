@@ -1,0 +1,30 @@
+import groovy.json.JsonSlurper
+
+def parseConfigJSON() {
+  def configFile = new File("${rootDir.parent}/attractions.io.config.json")
+  if (configFile.exists()) {
+    JsonSlurper jsonSlurper = new JsonSlurper()
+    def json = jsonSlurper.parse(configFile)
+    validateJSON(json)
+    rootProject.ext.attractionsIo = json
+  } else {
+    throw new GradleException("Unable to find configuration file `attractions.io.config.json` in the root directory of the React Native project")
+  }
+}
+
+static def validateJSON(Object json) {
+  if (json.apiKey == null || json.apiKey !instanceof String) {
+    throw new GradleException("An error occurred decoding attractions.io.config.json. Have you specified the apiKey in the correct format?")
+  }
+
+  if (json.mapLayr?.android?.github == null ||
+      json.mapLayr?.android?.github?.username == null ||
+      json.mapLayr?.android?.github?.username !instanceof String ||
+      json.mapLayr?.android?.github?.personalAccessToken == null ||
+      json.mapLayr?.android?.github?.personalAccessToken !instanceof String
+  ) {
+    throw new GradleException("An error occurred decoding attractions.io.config.json. Have you specified the mapLayr.android.github block in the correct format?")
+  }
+}
+
+parseConfigJSON()

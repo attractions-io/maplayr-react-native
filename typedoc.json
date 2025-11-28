@@ -1,0 +1,17 @@
+{
+	"entryPoints": ["src/index.tsx"],
+	"out": "gen-docs",
+	"skipErrorChecking": true,
+	"projectDocuments": [
+		"docs/getting-started.md",
+		"docs/annotations.md",
+		"docs/camera-control.md",
+		"docs/user-location.md",
+		"docs/routing.md"
+	],
+	
+	"sortEntryPoints": false,
+	
+	"hideGenerator": true,
+	"disableSources": true
+}
