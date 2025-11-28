@@ -2,6 +2,9 @@
   "name": "@maplayr/react-native",
   "version": "0.0.1",
   "description": "React Native MapLayr SDK",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
   "exports": {
