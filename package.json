@@ -1,9 +1,9 @@
 {
   "name": "@maplayr/react-native",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React Native MapLayr SDK",
   "publishConfig": {
-    "access": "public"
+    "registry": "https://registry.npmjs.org/"
   },
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -61,9 +61,6 @@
   ],
   "author": "Attractions.io",
   "homepage": "https://attractions.io/maplayr",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
   "devDependencies": {
     "@react-native-community/cli": "20.0.0",
     "@react-native/eslint-config": "0.81.1",
