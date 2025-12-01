@@ -25,7 +25,7 @@ Full usage instructions, including for installation, are available in the [MapLa
 
 ### Sample Code
 
-MapLayr comes with a [sample app](example/) you can use to see how it works.
+Check out the demo project inside the `example` directory, which covers most common use cases.
 
 ## Support
 
