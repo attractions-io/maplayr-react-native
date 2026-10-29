@@ -1,0 +1,168 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Camera Control | @maplayr/react-native</title><meta name="description" content="Documentation for @maplayr/react-native"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container"><a href="../index.html" class="title">@maplayr/react-native</a>
+<div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
+<ul role="listbox" id="tsd-search-results"></ul>
+<div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+<div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<ul class="tsd-breadcrumb" aria-label="Breadcrumb">
+<li><a href="" aria-current="page">Camera Control</a></li></ul></div>
+<div class="tsd-panel tsd-typography"><h1 id="camera-control" class="tsd-anchor-link">Camera Control<a href="#camera-control" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p>MapLayr provides powerful camera control capabilities that allow you to programmatically navigate your map. This guide explains how to move and manipulate the camera view.</p>
+<h2 id="getting-a-map-view-reference" class="tsd-anchor-link">Getting a Map View Reference<a href="#getting-a-map-view-reference" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>To control the camera, you need a reference to the <code>MapView</code> component. Use React's <code>useRef</code> hook to create a reference:</p>
+<pre><code class="tsx"><span class="hl-8">import</span><span class="hl-1"> { </span><span class="hl-6">useRef</span><span class="hl-1"> } </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;react&#39;</span><span class="hl-1">;</span><br/><span class="hl-8">import</span><span class="hl-1"> { </span><span class="hl-6">MapView</span><span class="hl-1"> } </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@maplayr/react-native&#39;</span><span class="hl-1">;</span><br/><span class="hl-8">import</span><span class="hl-1"> </span><span class="hl-8">type</span><span class="hl-1"> { </span><span class="hl-6">MapViewHandle</span><span class="hl-1"> } </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@maplayr/react-native&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">mapViewRef</span><span class="hl-1"> = </span><span class="hl-0">useRef</span><span class="hl-1">&lt;</span><span class="hl-10">MapViewHandle</span><span class="hl-1">&gt;(</span><span class="hl-5">null</span><span class="hl-1">);</span><br/><br/><span class="hl-9">&lt;</span><span class="hl-10">MapView</span><span class="hl-1"> </span><span class="hl-11">ref</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">mapViewRef</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-11">style</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">styles</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-11">map</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">mapLoadResult</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-9">&gt;</span><br/><span class="hl-1">  </span><span class="hl-5">{</span><span class="hl-3">/* Map content */</span><span class="hl-5">}</span><br/><span class="hl-9">&lt;/</span><span class="hl-10">MapView</span><span class="hl-9">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Once you have the reference, you can call <code>mapViewRef.current?.moveCamera()</code> to control the camera.</p>
+<h2 id="moving-the-camera" class="tsd-anchor-link">Moving the Camera<a href="#moving-the-camera" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The <code>moveCamera</code> method lets you adjust various camera properties. All properties are optional:</p>
+<pre><code class="tsx"><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">location:</span><span class="hl-1"> { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8952</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8431</span><span class="hl-1"> },</span><br/><span class="hl-1">  </span><span class="hl-6">heading:</span><span class="hl-1"> </span><span class="hl-13">45</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">span:</span><span class="hl-1"> </span><span class="hl-13">500</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">insets:</span><span class="hl-1"> </span><span class="hl-13">20</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">tilt:</span><span class="hl-1"> </span><span class="hl-13">30</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="camera-properties" class="tsd-anchor-link">Camera Properties<a href="#camera-properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>location</code></td>
+<td><code>{ latitude: number, longitude: number }</code> or <code>Array&lt;{ latitude: number, longitude: number }&gt;</code></td>
+<td>The coordinates to center on. Can be a single location or an array of locations to fit in view</td>
+</tr>
+<tr>
+<td><code>span</code></td>
+<td><code>number</code></td>
+<td>The distance in meters shown from top to bottom or left to right (whichever is smaller)</td>
+</tr>
+<tr>
+<td><code>route</code></td>
+<td><code>Route</code></td>
+<td>A route object to fit in the camera view</td>
+</tr>
+<tr>
+<td><code>followUserLocation</code></td>
+<td><code>boolean</code></td>
+<td>Keeps the camera centred on the user's location and turned to their heading until the user moves the map</td>
+</tr>
+<tr>
+<td><code>heading</code></td>
+<td><code>number</code></td>
+<td>The orientation in degrees relative to true north (0° = north, 90° = east, 180° = south, 270° = west)</td>
+</tr>
+<tr>
+<td><code>insets</code></td>
+<td><code>number</code></td>
+<td>Additional space in points around the frame after span calculations</td>
+</tr>
+<tr>
+<td><code>tilt</code></td>
+<td><code>number</code></td>
+<td>The camera's tilt angle in degrees</td>
+</tr>
+<tr>
+<td><code>animated</code></td>
+<td><code>boolean</code></td>
+<td>Whether to animate the transition (defaults to <code>false</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>location</code>, <code>route</code> and <code>followUserLocation</code> parameters are mutually exclusive. If an array of coordinates are passed to <code>location</code>, or a <code>route</code> is specified, the <code>span</code> property should be omitted. Otherwise, any remaining omitted property will be unchanged from its current value.</p>
+<h2 id="following-the-user" class="tsd-anchor-link">Following the User<a href="#following-the-user" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Pass <code>followUserLocation</code> to keep the camera centred on the user and turned to their heading as they
+move. Following ends when the user drags the map or a later <code>moveCamera</code> call takes the camera
+elsewhere. <code>MapView</code> reports every such change through <code>onCameraTargetChange</code>, whose <code>tracking</code> is
+<code>&quot;userLocation&quot;</code> while following and <code>&quot;none&quot;</code> otherwise:</p>
+<pre><code class="tsx"><span class="hl-5">const</span><span class="hl-1"> [</span><span class="hl-7">isFollowingUser</span><span class="hl-1">, </span><span class="hl-7">setIsFollowingUser</span><span class="hl-1">] = </span><span class="hl-0">useState</span><span class="hl-1">(</span><span class="hl-5">false</span><span class="hl-1">);</span><br/><br/><span class="hl-9">&lt;</span><span class="hl-10">MapView</span><br/><span class="hl-1">  </span><span class="hl-11">ref</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">mapViewRef</span><span class="hl-5">}</span><br/><span class="hl-1">  </span><span class="hl-11">style</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">styles</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><br/><span class="hl-1">  </span><span class="hl-11">map</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">mapLoadResult</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><br/><span class="hl-1">  </span><span class="hl-11">onCameraTargetChange</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-12">({ </span><span class="hl-6">tracking</span><span class="hl-12"> }) </span><span class="hl-5">=&gt;</span><span class="hl-12"> </span><span class="hl-0">setIsFollowingUser</span><span class="hl-12">(</span><span class="hl-6">tracking</span><span class="hl-12"> </span><span class="hl-1">===</span><span class="hl-12"> </span><span class="hl-2">&#39;userLocation&#39;</span><span class="hl-12">)</span><span class="hl-5">}</span><br/><span class="hl-9">/&gt;</span><br/><br/><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({ </span><span class="hl-6">followUserLocation:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">, </span><span class="hl-6">span:</span><span class="hl-1"> </span><span class="hl-13">200</span><span class="hl-1">, </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1"> });</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Location permission must already be granted, as for <code>UserLocationMarker</code>.</p>
+<h2 id="content-insets" class="tsd-anchor-link">Content Insets<a href="#content-insets" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The <code>contentInsets</code> prop marks space along each edge of the view as covered. Values are in points.
+The camera centres and fits content within the remaining area:</p>
+<pre><code class="tsx"><span class="hl-9">&lt;</span><span class="hl-10">MapView</span><span class="hl-1"> </span><span class="hl-11">style</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">styles</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-11">map</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">mapLoadResult</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-11">contentInsets</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-12">{ </span><span class="hl-6">bottom:</span><span class="hl-12"> </span><span class="hl-13">120</span><span class="hl-12"> }</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-9">/&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>The map does not add the device's safe area on either platform. If the map extends under the status
+bar, notch or home indicator, include those insets yourself, for example from
+<a href="https://github.com/AppAndFlow/react-native-safe-area-context"><code>react-native-safe-area-context</code></a>:</p>
+<pre><code class="tsx"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">insets</span><span class="hl-1"> = </span><span class="hl-0">useSafeAreaInsets</span><span class="hl-1">();</span><br/><br/><span class="hl-9">&lt;</span><span class="hl-10">MapView</span><span class="hl-1"> </span><span class="hl-11">style</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">styles</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-11">map</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">mapLoadResult</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-11">contentInsets</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-12">{ </span><span class="hl-1">...</span><span class="hl-6">insets</span><span class="hl-12">, </span><span class="hl-6">bottom:</span><span class="hl-12"> </span><span class="hl-6">insets</span><span class="hl-12">.</span><span class="hl-6">bottom</span><span class="hl-12"> </span><span class="hl-1">+</span><span class="hl-12"> </span><span class="hl-13">120</span><span class="hl-12"> }</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-9">/&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="examples" class="tsd-anchor-link">Examples<a href="#examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="moving-to-a-single-location" class="tsd-anchor-link">Moving to a Single Location<a href="#moving-to-a-single-location" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Move the camera to a specific coordinate:</p>
+<pre><code class="tsx"><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">location:</span><span class="hl-1"> { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8952</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8431</span><span class="hl-1"> },</span><br/><span class="hl-1">  </span><span class="hl-6">span:</span><span class="hl-1"> </span><span class="hl-13">300</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="fitting-multiple-locations" class="tsd-anchor-link">Fitting Multiple Locations<a href="#fitting-multiple-locations" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>When you pass an array of locations, the camera automatically adjusts to fit all points:</p>
+<pre><code class="tsx"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">locations</span><span class="hl-1"> = [</span><br/><span class="hl-1">  { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8952</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8431</span><span class="hl-1"> },</span><br/><span class="hl-1">  { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8982</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8463</span><span class="hl-1"> },</span><br/><span class="hl-1">  { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8983</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8494</span><span class="hl-1"> },</span><br/><span class="hl-1">];</span><br/><br/><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">location:</span><span class="hl-1"> </span><span class="hl-6">locations</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<p>This is particularly useful for showing all annotations at once.</p>
+<h3 id="changing-orientation" class="tsd-anchor-link">Changing Orientation<a href="#changing-orientation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Rotate the map to face a different direction:</p>
+<pre><code class="tsx"><span class="hl-3">// Face east</span><br/><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">heading:</span><span class="hl-1"> </span><span class="hl-13">90</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-3">// Face south</span><br/><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">heading:</span><span class="hl-1"> </span><span class="hl-13">180</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="adjusting-zoom-level" class="tsd-anchor-link">Adjusting Zoom Level<a href="#adjusting-zoom-level" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Control how much area is visible:</p>
+<pre><code class="tsx"><span class="hl-3">// Zoom in to show a 200-meter area</span><br/><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">span:</span><span class="hl-1"> </span><span class="hl-13">200</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-3">// Zoom out to show a 1000-meter area</span><br/><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">span:</span><span class="hl-1"> </span><span class="hl-13">1000</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="tilting-the-camera" class="tsd-anchor-link">Tilting the Camera<a href="#tilting-the-camera" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Adjust the camera's viewing angle:</p>
+<pre><code class="tsx"><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">tilt:</span><span class="hl-1"> </span><span class="hl-13">45</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="combined-operations" class="tsd-anchor-link">Combined Operations<a href="#combined-operations" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Update multiple camera properties in a single operation:</p>
+<pre><code class="tsx"><span class="hl-6">mapViewRef</span><span class="hl-1">.</span><span class="hl-6">current</span><span class="hl-1">?.</span><span class="hl-0">moveCamera</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">location:</span><span class="hl-1"> { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8952</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8431</span><span class="hl-1"> },</span><br/><span class="hl-1">  </span><span class="hl-6">heading:</span><span class="hl-1"> </span><span class="hl-13">45</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">span:</span><span class="hl-1"> </span><span class="hl-13">300</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">tilt:</span><span class="hl-1"> </span><span class="hl-13">30</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">animated:</span><span class="hl-1"> </span><span class="hl-5">true</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div>
+<div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>On This Page</h3></summary>
+<div class="tsd-accordion-details"><a href="#camera-control"><span>Camera <wbr/>Control</span></a>
+<ul>
+<li><a href="#getting-a-map-view-reference"><span>Getting a <wbr/>Map <wbr/>View <wbr/>Reference</span></a></li>
+<li><a href="#moving-the-camera"><span>Moving the <wbr/>Camera</span></a></li>
+<li>
+<ul>
+<li><a href="#camera-properties"><span>Camera <wbr/>Properties</span></a></li></ul></li>
+<li><a href="#following-the-user"><span>Following the <wbr/>User</span></a></li>
+<li><a href="#content-insets"><span>Content <wbr/>Insets</span></a></li>
+<li><a href="#examples"><span>Examples</span></a></li>
+<li>
+<ul>
+<li><a href="#moving-to-a-single-location"><span>Moving to a <wbr/>Single <wbr/>Location</span></a></li>
+<li><a href="#fitting-multiple-locations"><span>Fitting <wbr/>Multiple <wbr/>Locations</span></a></li>
+<li><a href="#changing-orientation"><span>Changing <wbr/>Orientation</span></a></li>
+<li><a href="#adjusting-zoom-level"><span>Adjusting <wbr/>Zoom <wbr/>Level</span></a></li>
+<li><a href="#tilting-the-camera"><span>Tilting the <wbr/>Camera</span></a></li>
+<li><a href="#combined-operations"><span>Combined <wbr/>Operations</span></a></li></ul></li></ul></div></details></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="../modules.html">@maplayr/react-native</a>
+<ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+<li>Loading...</li></ul></nav></div></div></div><footer></footer>
+<div class="overlay"></div></body></html>

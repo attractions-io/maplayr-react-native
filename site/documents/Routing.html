@@ -1,0 +1,197 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Routing | @maplayr/react-native</title><meta name="description" content="Documentation for @maplayr/react-native"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container"><a href="../index.html" class="title">@maplayr/react-native</a>
+<div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
+<ul role="listbox" id="tsd-search-results"></ul>
+<div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+<div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<ul class="tsd-breadcrumb" aria-label="Breadcrumb">
+<li><a href="" aria-current="page">Routing</a></li></ul></div>
+<div class="tsd-panel tsd-typography"><h1 id="routing" class="tsd-anchor-link">Routing<a href="#routing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p>MapLayr provides powerful routing capabilities that allow you to calculate paths between locations and display them on your map. This guide explains how to calculate routes, including from the user's location as they move, and display them.</p>
+<h2 id="the-hook" class="tsd-anchor-link">The <code>useRoute</code> Hook<a href="#the-hook" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The <code>useRoute</code> hook calculates a route from an origin to the closest of one or more destinations. It updates when the origin, destinations, or options change, when the map updates, and as the user moves when routing from their location:</p>
+<pre><code class="tsx"><span class="hl-8">import</span><span class="hl-1"> { </span><span class="hl-6">useRoute</span><span class="hl-1"> } </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@maplayr/react-native&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">routeResult</span><span class="hl-1"> = </span><span class="hl-0">useRoute</span><span class="hl-1">(</span><span class="hl-6">mapLoadResult</span><span class="hl-1">, {</span><br/><span class="hl-1">  </span><span class="hl-6">origin:</span><span class="hl-1"> { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8952</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8431</span><span class="hl-1"> },</span><br/><span class="hl-1">  </span><span class="hl-6">destinations:</span><span class="hl-1"> [{ </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8982</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8463</span><span class="hl-1"> }]</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-8">if</span><span class="hl-1"> (</span><span class="hl-6">routeResult</span><span class="hl-1">.</span><span class="hl-6">status</span><span class="hl-1"> === </span><span class="hl-2">&quot;success&quot;</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-2">`Route distance: </span><span class="hl-5">${</span><span class="hl-6">routeResult</span><span class="hl-12">.</span><span class="hl-6">route</span><span class="hl-12">.</span><span class="hl-6">distance</span><span class="hl-5">}</span><span class="hl-2"> meters`</span><span class="hl-1">);</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="parameters" class="tsd-anchor-link">Parameters<a href="#parameters" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The <code>useRoute</code> hook takes two parameters:</p>
+<ol>
+<li><code>mapLoadResult</code> - The result from the <code>useMap</code> hook</li>
+<li><code>params</code> - An object with the following properties:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>origin</code></td>
+<td><code>{ latitude: number, longitude: number } | UserLocation | null</code></td>
+<td>Yes</td>
+<td>The starting point of the route, or <code>UserLocation</code> to start from the user. Pass <code>null</code> to clear the route</td>
+</tr>
+<tr>
+<td><code>destinations</code></td>
+<td><code>Array&lt;{ latitude: number, longitude: number }&gt;</code></td>
+<td>Yes</td>
+<td>The possible end points of the route. The route goes to whichever is closest</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td><code>RouteConfiguration | RouteConfiguration[]</code></td>
+<td>No</td>
+<td>Optional route calculation settings, or a list of them to calculate one route for each</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return-value" class="tsd-anchor-link">Return Value<a href="#return-value" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The hook returns a <code>RouteResult</code>, or one per option when <code>options</code> is a list, with one of four statuses:</p>
+<ul>
+<li><code>idle</code>: There is nothing to calculate, because <code>origin</code> is <code>null</code> or the map has not loaded</li>
+<li><code>pending</code>: The route is not available yet, for example while waiting for the user's location</li>
+<li><code>success</code>: The route is available via <code>routeResult.route</code>, whose <code>distance</code> is its length in metres</li>
+<li><code>error</code>: No route could be calculated, with details in <code>routeResult.error</code></li>
+</ul>
+<p>When the origin, destinations or options change, the previous result is kept until the new route has one, so a displayed route does not disappear while it is recalculated.</p>
+<h2 id="routing-from-the-users-location" class="tsd-anchor-link">Routing from the User's Location<a href="#routing-from-the-users-location" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Pass <code>UserLocation</code> as the origin to route from the user. The route follows them as they move, and so do any shapes displaying it:</p>
+<pre><code class="tsx"><span class="hl-8">import</span><span class="hl-1"> { </span><span class="hl-6">useRoute</span><span class="hl-1">, </span><span class="hl-6">UserLocation</span><span class="hl-1"> } </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@maplayr/react-native&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">routeResult</span><span class="hl-1"> = </span><span class="hl-0">useRoute</span><span class="hl-1">(</span><span class="hl-6">mapLoadResult</span><span class="hl-1">, {</span><br/><span class="hl-1">  </span><span class="hl-6">origin:</span><span class="hl-1"> </span><span class="hl-6">UserLocation</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">destinations:</span><span class="hl-1"> [{ </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8982</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8463</span><span class="hl-1"> }]</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<p>The route is <code>pending</code> until the user's location is available, and is an <code>error</code> if location permission is denied. Location permission must be requested first, as described in <a href="User_Location.html#location-permissions">User Location</a>.</p>
+<h2 id="displaying-routes" class="tsd-anchor-link">Displaying Routes<a href="#displaying-routes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>To display a route on the map, use the <code>Shape</code> component inside your <code>MapView</code>:</p>
+<pre><code class="tsx"><span class="hl-8">import</span><span class="hl-1"> { </span><span class="hl-6">Shape</span><span class="hl-1"> } </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@maplayr/react-native&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-9">&lt;</span><span class="hl-10">MapView</span><span class="hl-1"> </span><span class="hl-11">style</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">styles</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-11">map</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">mapLoadResult</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-9">&gt;</span><br/><span class="hl-1">  </span><span class="hl-5">{</span><span class="hl-6">routeResult</span><span class="hl-12">.</span><span class="hl-6">status</span><span class="hl-12"> </span><span class="hl-1">===</span><span class="hl-12"> </span><span class="hl-2">&quot;success&quot;</span><span class="hl-12"> </span><span class="hl-1">&amp;&amp;</span><span class="hl-12"> (</span><br/><span class="hl-12">    </span><span class="hl-9">&lt;</span><span class="hl-10">Shape</span><br/><span class="hl-12">      </span><span class="hl-11">route</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">routeResult</span><span class="hl-12">.</span><span class="hl-6">route</span><span class="hl-5">}</span><br/><span class="hl-12">      </span><span class="hl-11">strokeWidth</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-13">5</span><span class="hl-5">}</span><br/><span class="hl-12">      </span><span class="hl-11">strokeColor</span><span class="hl-1">=</span><span class="hl-2">&quot;#007AFF&quot;</span><br/><span class="hl-12">    </span><span class="hl-9">/&gt;</span><br/><span class="hl-12">  )</span><span class="hl-5">}</span><br/><span class="hl-9">&lt;/</span><span class="hl-10">MapView</span><span class="hl-9">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="shape-properties" class="tsd-anchor-link">Shape Properties<a href="#shape-properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>route</code></td>
+<td><code>Route</code></td>
+<td>Required</td>
+<td>The <code>route</code> of a successful <code>useRoute</code> result</td>
+</tr>
+<tr>
+<td><code>strokeWidth</code></td>
+<td><code>number</code></td>
+<td><code>2</code></td>
+<td>The width of the line in points</td>
+</tr>
+<tr>
+<td><code>strokeColor</code></td>
+<td><code>ColorValue</code></td>
+<td><code>#FFFFFF</code></td>
+<td>The color of the route line (any React Native color value)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="multiple-destinations" class="tsd-anchor-link">Multiple Destinations<a href="#multiple-destinations" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Pass several coordinates to <code>destinations</code> to route to the closest one:</p>
+<pre><code class="tsx"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">destinations</span><span class="hl-1"> = [</span><br/><span class="hl-1">  { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8952</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8431</span><span class="hl-1"> },</span><br/><span class="hl-1">  { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8982</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8463</span><span class="hl-1"> },</span><br/><span class="hl-1">  { </span><span class="hl-6">latitude:</span><span class="hl-1"> </span><span class="hl-13">52.8983</span><span class="hl-1">, </span><span class="hl-6">longitude:</span><span class="hl-1"> -</span><span class="hl-13">1.8494</span><span class="hl-1"> },</span><br/><span class="hl-1">];</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">routeResult</span><span class="hl-1"> = </span><span class="hl-0">useRoute</span><span class="hl-1">(</span><span class="hl-6">mapLoadResult</span><span class="hl-1">, {</span><br/><span class="hl-1">  </span><span class="hl-6">origin:</span><span class="hl-1"> </span><span class="hl-6">UserLocation</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">destinations</span><span class="hl-1">,</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<p>The routing algorithm will calculate the route to whichever destination is closest via the available paths.</p>
+<h2 id="route-options" class="tsd-anchor-link">Route Options<a href="#route-options" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Customize route calculation with the <code>options</code> parameter:</p>
+<pre><code class="tsx"><span class="hl-8">import</span><span class="hl-1"> { </span><span class="hl-6">RouteOptions</span><span class="hl-1"> } </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@maplayr/react-native&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">routeResult</span><span class="hl-1"> = </span><span class="hl-0">useRoute</span><span class="hl-1">(</span><span class="hl-6">mapLoadResult</span><span class="hl-1">, {</span><br/><span class="hl-1">  </span><span class="hl-6">origin:</span><span class="hl-1"> </span><span class="hl-6">startLocation</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">destinations:</span><span class="hl-1"> [</span><span class="hl-6">endLocation</span><span class="hl-1">],</span><br/><span class="hl-1">  </span><span class="hl-6">options:</span><span class="hl-1"> </span><span class="hl-6">RouteOptions</span><span class="hl-1">.</span><span class="hl-0">avoidReducedAccessibility</span><span class="hl-1">()</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="comparing-routes-with-different-options" class="tsd-anchor-link">Comparing Routes with Different Options<a href="#comparing-routes-with-different-options" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Pass a list of options to calculate a route for each, for example to show the accessible route when there is one and the standard route otherwise. The results come back in the same order, and every update holds routes calculated from the same location:</p>
+<pre><code class="tsx"><span class="hl-5">const</span><span class="hl-1"> [</span><span class="hl-7">standard</span><span class="hl-1">, </span><span class="hl-7">accessible</span><span class="hl-1">] = </span><span class="hl-0">useRoute</span><span class="hl-1">(</span><span class="hl-6">mapLoadResult</span><span class="hl-1">, {</span><br/><span class="hl-1">  </span><span class="hl-6">origin:</span><span class="hl-1"> </span><span class="hl-6">UserLocation</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">destinations:</span><span class="hl-1"> [</span><span class="hl-6">endLocation</span><span class="hl-1">],</span><br/><span class="hl-1">  </span><span class="hl-6">options:</span><span class="hl-1"> [</span><span class="hl-6">RouteOptions</span><span class="hl-1">.</span><span class="hl-0">none</span><span class="hl-1">(), </span><span class="hl-6">RouteOptions</span><span class="hl-1">.</span><span class="hl-0">avoidReducedAccessibility</span><span class="hl-1">()]</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">route</span><span class="hl-1"> = </span><span class="hl-6">accessible</span><span class="hl-1">.</span><span class="hl-6">route</span><span class="hl-1"> ?? </span><span class="hl-6">standard</span><span class="hl-1">.</span><span class="hl-6">route</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="available-options" class="tsd-anchor-link">Available Options<a href="#available-options" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>avoidFlags</code></td>
+<td><code>Set&lt;string&gt;</code></td>
+<td>Set of edge flags to avoid when calculating routes (e.g., &quot;stairs&quot;, &quot;reducedAccessibility&quot;)</td>
+</tr>
+<tr>
+<td><code>attachEndpointsToAllowedPathsOnly</code></td>
+<td><code>boolean</code></td>
+<td>When <code>true</code>, only attaches route endpoints to paths that satisfy the route options. Default: <code>false</code></td>
+</tr>
+<tr>
+<td><code>originSpurStrategy</code></td>
+<td><code>&quot;curved&quot; | &quot;straight&quot; | &quot;none&quot;</code></td>
+<td>How to connect the origin to the path network. Default: <code>&quot;curved&quot;</code></td>
+</tr>
+<tr>
+<td><code>destinationSpurStrategy</code></td>
+<td><code>&quot;curved&quot; | &quot;straight&quot; | &quot;none&quot;</code></td>
+<td>How to connect the destination to the path network. Default: <code>&quot;curved&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="styling-with-multiple-shapes" class="tsd-anchor-link">Styling with Multiple Shapes<a href="#styling-with-multiple-shapes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Create visual depth by layering multiple shapes:</p>
+<pre><code class="tsx"><span class="hl-9">&lt;</span><span class="hl-10">MapView</span><span class="hl-1"> </span><span class="hl-11">style</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">styles</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-1"> </span><span class="hl-11">map</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">mapLoadResult</span><span class="hl-12">.</span><span class="hl-6">map</span><span class="hl-5">}</span><span class="hl-9">&gt;</span><br/><span class="hl-1">  </span><span class="hl-5">{</span><span class="hl-6">routeResult</span><span class="hl-12">.</span><span class="hl-6">status</span><span class="hl-12"> </span><span class="hl-1">===</span><span class="hl-12"> </span><span class="hl-2">&quot;success&quot;</span><span class="hl-12"> </span><span class="hl-1">&amp;&amp;</span><span class="hl-12"> (</span><br/><span class="hl-12">    </span><span class="hl-9">&lt;&gt;</span><br/><span class="hl-12">      </span><span class="hl-5">{</span><span class="hl-3">/* Outer shape - wider, lighter */</span><span class="hl-5">}</span><br/><span class="hl-12">      </span><span class="hl-9">&lt;</span><span class="hl-10">Shape</span><br/><span class="hl-12">        </span><span class="hl-11">route</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">routeResult</span><span class="hl-12">.</span><span class="hl-6">route</span><span class="hl-5">}</span><br/><span class="hl-12">        </span><span class="hl-11">strokeWidth</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-13">10</span><span class="hl-5">}</span><br/><span class="hl-12">        </span><span class="hl-11">strokeColor</span><span class="hl-1">=</span><span class="hl-2">&quot;#E8FCFF&quot;</span><br/><span class="hl-12">      </span><span class="hl-9">/&gt;</span><br/><span class="hl-12">      </span><span class="hl-5">{</span><span class="hl-3">/* Inner shape - narrower, darker */</span><span class="hl-5">}</span><br/><span class="hl-12">      </span><span class="hl-9">&lt;</span><span class="hl-10">Shape</span><br/><span class="hl-12">        </span><span class="hl-11">route</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-6">routeResult</span><span class="hl-12">.</span><span class="hl-6">route</span><span class="hl-5">}</span><br/><span class="hl-12">        </span><span class="hl-11">strokeWidth</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-13">5</span><span class="hl-5">}</span><br/><span class="hl-12">        </span><span class="hl-11">strokeColor</span><span class="hl-1">=</span><span class="hl-2">&quot;#007AFF&quot;</span><br/><span class="hl-12">      </span><span class="hl-9">/&gt;</span><br/><span class="hl-12">    </span><span class="hl-9">&lt;/&gt;</span><br/><span class="hl-12">  )</span><span class="hl-5">}</span><br/><span class="hl-9">&lt;/</span><span class="hl-10">MapView</span><span class="hl-9">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div>
+<div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>On This Page</h3></summary>
+<div class="tsd-accordion-details"><a href="#routing"><span>Routing</span></a>
+<ul>
+<li><a href="#the-hook"><span>The  <wbr/>Hook</span></a></li>
+<li>
+<ul>
+<li><a href="#parameters"><span>Parameters</span></a></li>
+<li><a href="#return-value"><span>Return <wbr/>Value</span></a></li></ul></li>
+<li><a href="#routing-from-the-users-location"><span>Routing from the <wbr/>User&#39;s <wbr/>Location</span></a></li>
+<li><a href="#displaying-routes"><span>Displaying <wbr/>Routes</span></a></li>
+<li>
+<ul>
+<li><a href="#shape-properties"><span>Shape <wbr/>Properties</span></a></li></ul></li>
+<li><a href="#multiple-destinations"><span>Multiple <wbr/>Destinations</span></a></li>
+<li><a href="#route-options"><span>Route <wbr/>Options</span></a></li>
+<li>
+<ul>
+<li><a href="#comparing-routes-with-different-options"><span>Comparing <wbr/>Routes with <wbr/>Different <wbr/>Options</span></a></li>
+<li><a href="#available-options"><span>Available <wbr/>Options</span></a></li></ul></li>
+<li><a href="#styling-with-multiple-shapes"><span>Styling with <wbr/>Multiple <wbr/>Shapes</span></a></li></ul></div></details></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="../modules.html">@maplayr/react-native</a>
+<ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+<li>Loading...</li></ul></nav></div></div></div><footer></footer>
+<div class="overlay"></div></body></html>
